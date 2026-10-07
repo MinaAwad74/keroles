@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Keroles — Assistant Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f1ea;--ink:#111;--mute:#6b6b6b;--accent:#d11528;--sage:#d9e4d0;--sand:#efe3c8;--sky:#d6e4f0}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',Helvetica,Arial,sans-serif;line-height:1.6}
+.wrap{max-width:1100px;margin:auto;padding:0 22px}
+a{color:inherit}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-weight:700;letter-spacing:-.5px}
+.top nav{display:flex;gap:22px;font-size:.95rem}
+.top nav a{text-decoration:none}
+.top nav a:hover{color:var(--accent)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;padding:40px 0 64px}
+.pill{display:inline-block;border:1.5px solid var(--ink);border-radius:999px;padding:4px 14px;font-size:.85rem;margin-bottom:20px}
+.pill i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#2fb344;margin-right:8px}
+.name{font-size:clamp(4.2rem,15vw,9.5rem);line-height:.88;letter-spacing:-.06em;font-weight:700;margin-bottom:22px}
+.role{font-size:1.1rem;font-weight:500;color:var(--accent);margin-bottom:26px;letter-spacing:.5px}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;letter-spacing:-2px;font-weight:700}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{max-width:460px;color:var(--mute);margin:18px 0 28px;font-size:1.1rem}
+.btn{display:inline-block;background:var(--ink);color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:500;margin-right:10px}
+.btn.o{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* photo */
+.photo{
+  width:100%;
+  max-width:420px;
+  justify-self:center;
+  aspect-ratio:4/5;
+  border-radius:999px 999px 28px 28px;
+  background:var(--accent);
+  display:grid;place-items:center;
+  color:#fff;font-size:5rem;font-weight:700;
+  position:relative;overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+.photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 15%;
+  display:block;
+}
+
+/* marquee */
+.marquee{background:var(--ink);color:var(--bg);overflow:hidden;white-space:nowrap;padding:14px 0}
+.marquee div{display:inline-block;animation:run 22s linear infinite;font-size:1.3rem;font-weight:500}
+.marquee span{margin:0 26px;color:var(--accent)}
+@keyframes run{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee div{animation:none}}
+
+/* sections */
+section{padding:72px 0}
+.label{font-size:.85rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+h2{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-1.5px;line-height:1.05;margin-bottom:34px;max-width:620px}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.box{border-radius:22px;padding:24px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between}
+.box h3{font-size:1.25rem;line-height:1.2}
+.box p{font-size:.92rem;opacity:.75}
+.box .n{font-size:.85rem;opacity:.6}
+.b1{grid-column:span 2;background:var(--sage)}.b2{background:var(--sand)}.b3{background:var(--sky)}
+.b4{background:var(--ink);color:#fff}.b5{grid-column:span 2;background:var(--accent);color:#fff}.b6{background:#fff}
+.big{font-size:3.4rem;font-weight:700;letter-spacing:-2px;line-height:1}
+
+/* experience */
+.row{display:grid;grid-template-columns:140px 1fr auto;gap:20px;padding:26px 0;border-top:1.5px solid var(--ink);align-items:baseline}
+.row:last-child{border-bottom:1.5px solid var(--ink)}
+.row .y{color:var(--mute)}
+.row h3{font-size:1.4rem;letter-spacing:-.5px}
+.row p{color:var(--mute);margin-top:4px}
+.row .at{font-weight:500}
+.row:hover{background:#fff}
+
+/* strengths */
+.rev{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.q{background:#fff;border-radius:22px;padding:28px;line-height:1.45;display:flex;flex-direction:column}
+.q h3{font-size:1.3rem;line-height:1.2;margin-bottom:10px}
+.q p{color:var(--mute);font-size:1rem}
+.q b{margin-top:auto!important;padding-top:16px}
+.q b{display:block;margin-top:16px;font-size:.9rem;font-weight:500;color:var(--mute)}
+
+/* contact */
+.cta{background:var(--ink);color:#fff;border-radius:32px;padding:60px 30px;text-align:center}
+.cta h2{margin:0 auto 24px;color:#fff}
+.cta h2 em{font-style:normal;color:var(--accent)}
+.cta .btn{background:var(--accent)}.cta .btn.o{background:transparent;color:#fff;border-color:#fff}
+.cta .btn:hover{background:#fff;color:var(--ink)}
+footer{text-align:center;color:var(--mute);padding:30px;font-size:.85rem}
+
+@media(max-width:800px){
+.hero{grid-template-columns:1fr}
+.photo{max-width:300px;margin:0 auto}
+.bento{grid-template-columns:1fr 1fr}.b1,.b5{grid-column:span 2}
+.row{grid-template-columns:1fr;gap:4px}.rev{grid-template-columns:1fr}
+.top nav{gap:14px;font-size:.85rem}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="top">
+    <div class="logo">Keroles Fadel</div>
+    <nav><a href="#skills">Skills</a><a href="#work">Work</a><a href="#words">Strengths</a><a href="#contact">Contact</a></nav>
+  </div>
+
+  <header class="hero">
+    <div>
+      <div class="name">Keroles</div>
+      <div class="role">Assistant Manager · Restaurant &amp; Hospitality</div>
+      <span class="pill"><i></i>Available for new roles</span>
+      <h1>Service that <em>feels</em> effortless.</h1>
+      <p class="lead">I'm Keroles, a hospitality professional with 7+ years in El Gouna's restaurants and resorts. I started on the floor and grew into Assistant Manager, leading teams and keeping every service smooth, warm, and calm.</p>
+      <a class="btn" href="#contact">Hire me</a><a class="btn o" href="#work">See experience</a>
+    </div>
+
+    <!-- Put koko.jpeg in the same folder as this file -->
+    <div class="photo">K<img src="koko.jpeg" alt="Keroles" width="840" height="1050" onerror="this.remove()"></div>
+  </header>
+</div>
+
+<div class="marquee"><div>
+  Team Leadership <span>✦</span> Guest Care <span>✦</span> Floor Management <span>✦</span> Fine Dining <span>✦</span> Training <span>✦</span> Fast Service <span>✦</span> POS <span>✦</span>
+  Team Leadership <span>✦</span> Guest Care <span>✦</span> Floor Management <span>✦</span> Fine Dining <span>✦</span> Training <span>✦</span> Fast Service <span>✦</span> POS <span>✦</span>
+</div></div>
+
+<div class="wrap">
+  <section id="skills">
+    <div class="label">What I do</div>
+    <h2>Small details that make a big night.</h2>
+    <div class="bento">
+      <div class="box b1"><span class="n">01</span><div><h3>Floor management</h3><p>Running the floor, from the first greeting to the final bill.</p></div></div>
+      <div class="box b2"><span class="n">02</span><div><h3>Team leadership</h3><p>Training, scheduling, and motivating the floor team.</p></div></div>
+      <div class="box b3"><span class="n">03</span><div><h3>Guest care</h3><p>Turning complaints into loyal regulars.</p></div></div>
+      <div class="box b4"><div class="big">4</div><p>roles, from waiter to assistant manager</p></div>
+      <div class="box b5"><div class="big">7+</div><p style="opacity:.9">years in El Gouna's restaurants and resorts, from the floor to management.</p></div>
+      <div class="box b6"><span class="n">04</span><div><h3>Languages</h3><p>Arabic · English · (Good)</p></div></div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="label">Experience</div>
+    <h2>Where I've served.</h2>
+    <div>
+      <div class="row"><span class="y">6/2025 — 9/2026</span><div><h3>Assistant Manager</h3><p>Supporting the restaurant manager, supervising the floor team, and keeping daily operations and guest satisfaction on track.</p></div><span class="at">Al Bahr Restaurant, El Gouna</span></div>
+      <div class="row"><span class="y">1/2022 — 5/2025</span><div><h3>Captain Order</h3><p>Leading the floor team, taking and coordinating orders, and keeping service smooth during peak hours.</p></div><span class="at">Al Bahr Restaurant, El Gouna</span></div>
+      <div class="row"><span class="y">6/2019 — 12/2021</span><div><h3>Waiter</h3><p>Full table service, guest care, and menu knowledge in a busy seaside restaurant.</p></div><span class="at">Al Bahr Restaurant, El Gouna</span></div>
+      <div class="row"><span class="y">3/2018 — 10/2018</span><div><h3>Waiter</h3><p>Restaurant and buffet service for resort guests.</p></div><span class="at">Bonita Village</span></div>
+    </div>
+  </section>
+
+  <section id="words">
+    <div class="label">Strengths</div>
+    <h2>What I bring to the team.</h2>
+    <div class="rev">
+      <div class="q"><h3>From the floor to management</h3><p>Started as a waiter and grew to Assistant Manager, so I know every role on the floor from experience.</p><b>Waiter → Captain Order → Assistant Manager</b></div>
+      <div class="q"><h3>Commitment and consistency</h3><p>More than 7 years at the same restaurant, building trust with guests and colleagues.</p><b>Al Bahr Restaurant, El Gouna · 2019 — 2026</b></div>
+      <div class="q"><h3>Leading under pressure</h3><p>Coordinating orders and guiding the team to keep service smooth and calm during peak hours.</p><b>Team leadership · Guest care</b></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cta">
+      <div class="label">Get in touch</div>
+      <h2>Let's build great <em>service</em> together.</h2>
+      <a class="btn" href="mailto:krkrfadelkero@gmail.com">krkrfadelkero@gmail.com</a>
+      <a class="btn o" href="https://wa.me/201552126457?text=Hello%20Keroles" target="_blank" rel="noopener">WhatsApp: +20 1552126457</a>
+    </div>
+  </section>
+</div>
+
+<footer>© Keroles · El Gouna, Egypt</footer>
+</body>
+</html>
